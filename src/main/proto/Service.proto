@@ -1,0 +1,36 @@
+syntax = "proto3";
+package proto;
+
+option java_package = "com.test.rpc";
+option java_multiple_files = false;
+
+
+// 定义通用的 Grpc 请求体
+message Request {
+    int32 serialize = 1;
+    bytes request = 2;
+}
+
+// 定义通用的 Grpc 响应体
+message Response {
+    bytes response = 1;
+}
+
+
+// 定义通用的 Grpc 服务
+service CommonService {
+    // 处理请求
+    rpc Handle ( Request ) returns ( Response );
+}
+
+message SayHelloRequest{
+    bytes name=1;
+}
+
+message SayHelloResponse{
+    bytes result=1;
+}
+
+service SayHelloService{
+    rpc SayHello(SayHelloRequest) returns (SayHelloResponse);
+}
